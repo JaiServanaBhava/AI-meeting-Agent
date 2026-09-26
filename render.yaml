@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: ai-meeting-chief-of-staff
+    env: python
+    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt watchdog"
+    startCommand: "streamlit run app.py --server.port=$PORT --server.address=0.0.0.0"
+    plan: free
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: OTEL_SDK_DISABLED
+        value: "true"
+      - key: CREWAI_DISABLE_TELEMETRY
+        value: "true"
+      - key: CREWAI_DISABLE_TRACKING
+        value: "true"
